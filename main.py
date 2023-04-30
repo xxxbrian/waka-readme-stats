@@ -544,11 +544,11 @@ def generate_new_readme(stats: str, readme: str):
 
 if __name__ == '__main__':
     # 4/10 probability to continue running
-    if random.randint(1, 10) > 4:
-        print("Fate decided to not run this time.")
-        exit(0)
-    else:
-        print("Fate decided to run this time.")
+#     if random.randint(1, 10) > 4:
+#         print("Fate decided to not run this time.")
+#         exit(0)
+#     else:
+#         print("Fate decided to run this time.")
     try:
         start_time = datetime.datetime.now().timestamp() * 1000
         if ghtoken is None:
