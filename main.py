@@ -323,7 +323,7 @@ def generate_commit_list(tz):
 def get_waka_time_stats():
     stats = ''
     request = requests.get(
-        f"https://wakatime.com/api/v1/users/current/stats/last_7_days?api_key={waka_key}")
+        f"https://waka.quick.to/api/compat/wakatime/v1/users/current/stats/last_7_days?api_key={waka_key}")
     no_activity = translate["No Activity Tracked This Week"]
 
     if request.status_code == 401:
@@ -333,14 +333,14 @@ def get_waka_time_stats():
         data = request.json()
         if showCommit.lower() in truthy:
             empty = False
-            stats = stats + generate_commit_list(tz=data['data']['timezone']) + '\n\n'
+            stats = stats + generate_commit_list('Australia/Sydney') + '\n\n'
 
         stats += '📊 **' + translate['This Week I Spend My Time On'] + '** \n\n'
         stats += '```text\n'
         if showTimeZone.lower() in truthy:
             empty = False
-            tzone = data['data']['timezone']
-            stats = stats + '⌚︎ ' + translate['Timezone'] + ': ' + tzone + '\n\n'
+            tzone = "Australia/Sydney"
+            stats = stats + '⌚︎ ' + "Australia/Sydney" + ': ' + tzone + '\n\n'
 
         if showLanguage.lower() in truthy:
             empty = False
@@ -483,7 +483,7 @@ def get_stats(github):
 
     if show_total_code_time.lower() in truthy:
         request = requests.get(
-            f"https://wakatime.com/api/v1/users/current/all_time_since_today?api_key={waka_key}")
+            f"https://waka.quick.to/api/compat/wakatime/v1/users/current/all_time_since_today?api_key={waka_key}")
         if request.status_code == 401:
             print("Error With WAKA time API returned " + str(request.status_code) + " Response " + str(request.json()))
         elif "text" not in request.json()["data"]:
