@@ -444,11 +444,14 @@ def get_short_info(github):
     else:
         disk_usage = humanize.naturalsize(user_info.disk_usage)
     request = requests.get('https://github-contributions.now.sh/api/v1/' + user_info.login)
-    if request.status_code == 200:
+    if request.status_code == 200 and len(request.json()['years']) > 0:
         data = request.json()
         total = data['years'][0]['total']
         year = data['years'][0]['year']
         string += '> 🏆 ' + translate['Contributions in the year'] % (humanize.intcomma(total), year) + '\n > \n'
+    else:
+        print("Error with GitHub contributions API returned " + str(request.status_code) + " Response " + str(
+            request.json()))
 
     string += '> 📦 ' + translate["Used in GitHub's Storage"] % disk_usage + ' \n > \n'
     is_hireable = user_info.hireable
