@@ -340,7 +340,7 @@ def get_waka_time_stats():
         if showTimeZone.lower() in truthy:
             empty = False
             tzone = "Australia/Sydney"
-            stats = stats + '⌚︎ ' + "Australia/Sydney" + ': ' + tzone + '\n\n'
+            stats = stats + '⌚︎ ' + "TimeZone" + ': ' + tzone + '\n\n'
 
         if showLanguage.lower() in truthy:
             empty = False
